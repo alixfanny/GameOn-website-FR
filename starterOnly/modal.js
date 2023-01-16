@@ -1,4 +1,5 @@
 const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/
+const NumberRegex = /^[0-9]+/
 
 
 
@@ -107,17 +108,30 @@ dateBirth.addEventListener("input",annulDisplayError);
 
 function quantityValidation (event){
   const quantity = event.target
+  
+  if(!quantity.value.match(NumberRegex)){
+    displayError(quantity, "Veuillez entrer une valeur numérique.")
+  }
 }
 
 const question = document.getElementById ('quantity');
-question.addEventListener("  ", quantityValidation);
+question.addEventListener("blur", quantityValidation);
+question.addEventListener("input", annulDisplayError);
 
 //function button radio
 
+function buttonRadio(){
+  const radio = document.getElementsByName('location')
+  let valeur;
+
+  for(let i =0; i < boutons.length; i++){
+    if(boutons[i].checked){
+      valeur = boutons[i].value;
+    }
+  }
+}
+
+const radioChecked = document.getElementById('')
 
 //function checkbox
-
 // function validation form
-
-
-
