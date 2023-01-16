@@ -139,6 +139,10 @@ main {
 
 /* Modal form */
 
+.message{
+  font-size: 12px;
+}
+
 .button {
   background: #fe142f;
   margin-top: 0.5em;
