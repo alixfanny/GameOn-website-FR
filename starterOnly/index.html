@@ -41,7 +41,7 @@
             Vous aimez jouer ? Notre prochain évènement gaming est ouvert
             aux réservations... Places limitées !
           </p>
-          <button class="btn-signup modal-btn">
+          <button class="btn-signup modal-btn" id="btn-signup">
             je m'inscris
           </button>
         </div>
@@ -111,7 +111,8 @@
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
-                class="formData">
+                class="formData"
+                id="formRadio">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -188,7 +189,6 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
                 />
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
@@ -207,9 +207,9 @@
                 id="submit-btn"
                 class="btn-submit"
                 type="submit"
-                disabled="disabled"
                 class="button"
                 value="C'est parti"
+                disabled="disabled"
               />
             </form>
           </div>

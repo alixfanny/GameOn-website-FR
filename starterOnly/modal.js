@@ -58,28 +58,22 @@ function nameValidation(event) {
   const name = event.target
 
   if (name.value.length < 2) {
-    return false;
+    displayError(name, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
+    return;
   }
 
   if (!name.value.match(/^[a-zA-Z-]+/)) {
-    return false;
+    displayError(name, "Veuillez ne pas entrer de symboles ou de chiffres");
+    return;
   }
-  return true;
-}
-
-function errorName(name){
-  displayError(name, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
-  displayError(name, "Veuillez ne pas entrer de symboles ou de chiffres");
 }
 
 const firstName = document.getElementById ('first');
 firstName.addEventListener("blur", nameValidation);
-firstName.addEventListener("blur", disabled);
 firstName.addEventListener("input",annulDisplayError);
 
 const lastName = document.getElementById ('last');
 lastName.addEventListener("blur", nameValidation);
-lastName.addEventListener("blur", disabled);
 lastName.addEventListener("input",annulDisplayError);
 
 //function mail
@@ -87,17 +81,12 @@ lastName.addEventListener("input",annulDisplayError);
 function mailValidation (event) {
   const mail = event.target;
 
-  if (!mail.value.match(emailRegex)) 
-  return true;
-}
-
-function errorMail(mail){
+  if (!mail.value.match(emailRegex))
   displayError(mail, "L'addresse mail n'est pas valide");
 }
 
 const eMail = document.getElementById ('email');
 eMail.addEventListener("blur", mailValidation);
-eMail.addEventListener("blur", disabled);
 eMail.addEventListener("input",annulDisplayError);
 
 //function birth date
@@ -105,17 +94,13 @@ eMail.addEventListener("input",annulDisplayError);
 function birthDateValidation (event) {
   const birth = event.target
 
-  if (birth.value.length ==" ")
-  return true;
-}
-
-function errorBirth(birth){
+  if (birth.value.length ==" "){
   displayError(birth, "Vous devez entrer votre date de naissance.")
+  }
 }
 
 const dateBirth = document.getElementById ('birthdate');
 dateBirth.addEventListener("blur", birthDateValidation);
-dateBirth.addEventListener("blur", disabled);
 dateBirth.addEventListener("input",annulDisplayError);
 
 //function quantity
@@ -123,96 +108,62 @@ dateBirth.addEventListener("input",annulDisplayError);
 function quantityValidation (event){
   const quantity = event.target
   
-  if(!quantity.value.match(NumberRegex))
-  return true;
-}
-
-function errorQuantity(quantity){
+  if(!quantity.value.match(NumberRegex)){
   displayError(quantity, "Veuillez entrer une valeur numérique.")
+  }
 }
 
 const question = document.getElementById ('quantity');
 question.addEventListener("blur", quantityValidation);
-question.addEventListener("blur", disabled);
 question.addEventListener("input", annulDisplayError);
 
 
 // function validate button-radio
 
-function validateradio(){
+function validateRadio(){
 
-  const radio = document.querySelector('.checkbox-input[type="radio"]:checked')
+  const radioButtons = document.querySelectorAll("div#formRadio>input");
   
-  if(radio === null){
-    return false;
+  let radioCheck = false;
+
+  for(let i=0; i < radioButtons.length; i++){
+    if(radioButtons[i].checked){
+      radioCheck = true;
+    }
   }
-  return true;
+
+  if(radioCheck === false){
+      document.getElementById("errorMessageRadio").innerHTML = "Vous devez choisir une option."
+  }else{
+    document.getElementById("errorMessageRadio").innerHTML = " "
+  }
 }
 
-function errorRadio (){
-  document.getElementById("errorMessageRadio").innerHTML = "Vous devez choisir une option."
+const buttonRadio = document.getElementById('btn-signup');
+buttonRadio.addEventListener("click",validateRadio);
+
+const valideButtonRadio = document.querySelectorAll("div#formRadio>input");
+for(let i=0; i < valideButtonRadio.length; i++){
+ valideButtonRadio[i].addEventListener("change", validateRadio);
 }
+
+/////////////////////////////////////////////////////////////// ci-dessus ne pas changer tous fonctionne /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function validate checkbox
 
-function validateCheckbox(){
+//function validateCheckbox(){
 
   const checkbox = document.getElementById("checkbox1");
+  let checkboxButton = true;
 
-  if(checkbox.checked !== true){
-    return false;
+  if(checkbox.change !== true){
+    document.getElementById('errorMessageCheckbox').innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions."
+    document.getElementById("submit-btn").disabled = false;
+
+  }else{
+    document.getElementById('errorMessageCheckbox').innerHTML = " "
+    document.getElementById("submit-btn").disabled = true;
   }
-  return true;
-}
-
-function errorCheckbox (){
-  document.getElementById('errorMessageCheckbox').innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions."
-}
-
+//
 
 // function validation form
-
-function validate() {
-
-  const isValidateRadio = validateradio();
-  if(!isValidateRadio) errorRadio();
-
-  const isValidateCheckbox = validateCheckbox();
-  if(!isValidateCheckbox) errorCheckbox();
-
-  const isValidateFirstName = nameValidation({target: firstName});
-  if(!isValidateFirstName) errorName(firstName);
-
-  const isValidateLastName = nameValidation({target: lastName});
-  if(!isValidateLastName) errorName(lastName);
-
-  const isValidateMail = mailValidation({target: eMail});
-  if(!isValidateMail) errorMail(eMail);
-
-  const isValidateBirthDate = birthDateValidation({target: dateBirth});
-  if(!isValidateBirthDate) errorBirth(dateBirth);
-
-  const isValidateQuantity = quantityValidation({target: question});
-  if(!isValidateQuantity) errorQuantity(question);
-
-  if(!isValidateRadio || !isValidateCheckbox || !isValidateFirstName || !isValidateLastName|| !isValidateMail || !isValidateBirthDate || !isValidateQuantity) {
-    return false
-  }
-}
-
-function disabled(){
-
-  const isValidateRadio = validateradio();
-  const isValidateCheckbox = validateCheckbox();
-  const isValidateFirstName = nameValidation({target: firstName});
-  const isValidateLastName = nameValidation({target: lastName});
-  const isValidateMail = mailValidation({target: eMail});
-  const isValidateBirthDate = birthDateValidation({target: dateBirth});
-  const isValidateQuantity = quantityValidation({target: question});
-
-  if(isValidateBirthDate && isValidateCheckbox && isValidateFirstName && isValidateLastName && isValidateMail && isValidateQuantity && isValidateRadio){
-    document.getElementById("submit-btn").disabled = false;
-  }
-}
-
-
