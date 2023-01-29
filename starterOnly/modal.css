@@ -185,6 +185,7 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
+  height: 780px;
 }
 
 .modal-body {
@@ -538,5 +539,12 @@ footer {
 
 #errorMessageRadio{
   font-size: 12px;
+}
+
+.messageConfirmation{
+  font-size: 36px;
+  text-align: center;
+  width: 498px;
+  padding: 296px 106px;
 }
 

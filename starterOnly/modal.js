@@ -17,20 +17,30 @@ function editNav() {
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const modalbgValidation = document.querySelector(".bgroundValidation");
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// launch modal form + modal validation
 function launchModal() {
   modalbg.style.display = "block";
 }
 
 // closing modal form
-let closing = document.getElementsByClassName("close")
-closing[0].addEventListener("click", function(event) {
-  modalbg.style.display = "none";
-});
+let closing = document.getElementsByClassName("close");
+
+for(let i=0; i < closing.length; i++){
+  closing[i].addEventListener("click", function(){
+    console.log("test");
+    modalbg.style.display = "none";
+    modalbgValidation.style.display ="none";
+    }
+  )
+};
+
+const btnClose = document.getElementById("btnClose");
+btnClose.addEventListener("click", function(){modalbgValidation.style.display ="none"});
 
 // function message d'erreur
 
@@ -59,13 +69,14 @@ function nameValidation(event) {
 
   if (name.value.length < 2) {
     displayError(name, "Veuillez entrer 2 caractères ou plus pour le champ du nom.");
-    return;
+    return false;
   }
 
   if (!name.value.match(/^[a-zA-Z-]+/)) {
     displayError(name, "Veuillez ne pas entrer de symboles ou de chiffres");
-    return;
+    return false;
   }
+  return true
 }
 
 const firstName = document.getElementById ('first');
@@ -81,8 +92,11 @@ lastName.addEventListener("input",annulDisplayError);
 function mailValidation (event) {
   const mail = event.target;
 
-  if (!mail.value.match(emailRegex))
+  if(!mail.value.match(emailRegex)){
   displayError(mail, "L'addresse mail n'est pas valide");
+  return false;
+  }
+  return true;
 }
 
 const eMail = document.getElementById ('email');
@@ -96,7 +110,9 @@ function birthDateValidation (event) {
 
   if (birth.value.length ==" "){
   displayError(birth, "Vous devez entrer votre date de naissance.")
+  return false;
   }
+  return true;
 }
 
 const dateBirth = document.getElementById ('birthdate');
@@ -110,7 +126,9 @@ function quantityValidation (event){
   
   if(!quantity.value.match(NumberRegex)){
   displayError(quantity, "Veuillez entrer une valeur numérique.")
+  return false;
   }
+  return true;
 }
 
 const question = document.getElementById ('quantity');
@@ -134,8 +152,10 @@ function validateRadio(){
 
   if(radioCheck === false){
       document.getElementById("errorMessageRadio").innerHTML = "Vous devez choisir une option."
+      return false;
   }else{
-    document.getElementById("errorMessageRadio").innerHTML = " "
+    document.getElementById("errorMessageRadio").innerHTML = " ";
+    return true;
   }
 }
 
@@ -147,23 +167,56 @@ for(let i=0; i < valideButtonRadio.length; i++){
  valideButtonRadio[i].addEventListener("change", validateRadio);
 }
 
-/////////////////////////////////////////////////////////////// ci-dessus ne pas changer tous fonctionne /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function validate checkbox
 
-//function validateCheckbox(){
+function validateCheckbox(){
 
   const checkbox = document.getElementById("checkbox1");
-  let checkboxButton = true;
+  let checkboxButton = false;
 
-  if(checkbox.change !== true){
-    document.getElementById('errorMessageCheckbox').innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions."
-    document.getElementById("submit-btn").disabled = false;
+  if(checkbox.checked){
+    checkboxButton = true;
+  }
+
+  if(checkboxButton === false){
+    document.getElementById('errorMessageCheckbox').innerHTML = "Vous devez vérifier que vous acceptez les termes et conditions. "
+    document.getElementById("submit-btn").disabled = true;
+    return false;
 
   }else{
     document.getElementById('errorMessageCheckbox').innerHTML = " "
-    document.getElementById("submit-btn").disabled = true;
+    document.getElementById("submit-btn").disabled = false;
+    return true;
   }
-//
+}
+
+const checkboxDefault = document.getElementById('btn-signup');
+checkboxDefault.addEventListener("click", validateCheckbox)
+
+const valideCheckbox = document.getElementById("checkbox1");
+valideCheckbox.addEventListener("change", validateCheckbox);
+
+/////////////////////////////////////////////////////////////// ci-dessus ne pas changer tous fonctionne ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function validation form
+
+function validateForm(){
+  if(
+    nameValidation({target: firstName}) && 
+    nameValidation({target: lastName}) && 
+    mailValidation({target: eMail}) && 
+    birthDateValidation({target: dateBirth}) && 
+    quantityValidation({target: question}) && 
+    validateRadio() && 
+    validateCheckbox() === true
+  ){
+    modalbg.style.display = "none";
+    modalbgValidation.style.display = "block";
+
+  }
+
+  return false;
+}
+
+
