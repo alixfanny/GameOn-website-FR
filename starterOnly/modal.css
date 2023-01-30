@@ -8,6 +8,7 @@
   margin: 0;
   padding: 0;
 }
+
 /* Landing Page */
 
 body {
@@ -30,10 +31,26 @@ img {
   padding-right: 1rem;
 }
 
+@media screen and (max-width: 768px) {
+  img{
+    width: 160px;
+  }
+}
+
 .topnav {
   overflow: hidden;
   margin: 3.5%;
 }
+
+@media screen and (max-width: 768px) {
+  .topnav{
+    margin: 7% 4.5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
 .header-logo {
     float: left;
 }
@@ -97,7 +114,7 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
-    margin-top: -15px;
+    color: #ff001b;
   }
 } 
 
@@ -111,8 +128,14 @@ main {
   margin: 1px 20px 15px;
   border-radius: 2rem;
   text-align: justify;
+}
 
-
+@media screen and (max-width: 768px) {
+  main{
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
+  }
 }
 
 .modal-btn {
@@ -185,7 +208,13 @@ main {
   position: relative;
   color: #fff;
   padding-top: 10px;
-  height: 780px;
+}
+
+@media screen and (max-width: 540px) {
+  .content{
+    margin: 20% auto;
+    min-height: 940px;
+  }
 }
 
 .modal-body {
@@ -337,6 +366,7 @@ input[data-error]::after {
   color: #fff;
   cursor: pointer;
   border: 0;
+  margin-bottom: 20px;
 }
 /* custom select styles */
 .custom-select {
@@ -455,7 +485,7 @@ input[data-error]::after {
   outline: none;
   text-transform: capitalize;
   font-size: 1.3rem;
-  padding: 15px 23px;
+  padding: 11px 40px;
   margin: 0;
   margin-top: 59px;
 }
@@ -487,11 +517,13 @@ footer {
   .hero-section {
     display: block;
     box-shadow: unset;
+    min-height: 61vh;
   }
   .hero-content {
     background: #fff;
     color: #000;
     padding: 20px;
+    min-width: 0px;
   }
   .hero-content::after {
     content: unset;
@@ -500,13 +532,20 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
-    white-space: normal;
+    font-size: 39px;
+    font-weight: 500;
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 13px;
+    font-weight: 400;
   }
+
+  .hero-img{
+    margin-right: 4.5%;
+    margin-left: 4.5%;
+  }
+
   .hero-img img {
     border-radius: 10px;
     margin-top: 40px;
@@ -546,5 +585,19 @@ footer {
   text-align: center;
   width: 498px;
   padding: 296px 106px;
+}
+
+@media screen and (max-width: 540px) {
+  .messageConfirmation{
+    width: 406px;
+    padding: 294px 25px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .btn-submit{
+    margin-bottom: 20px;
+  }
+  
 }
 

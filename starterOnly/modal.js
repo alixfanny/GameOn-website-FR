@@ -3,9 +3,8 @@ const NumberRegex = /^[0-9]+/
 
 
 
-
 function editNav() {
-  var x = document.getElementById("myTopnav");
+  const x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -197,7 +196,6 @@ checkboxDefault.addEventListener("click", validateCheckbox)
 const valideCheckbox = document.getElementById("checkbox1");
 valideCheckbox.addEventListener("change", validateCheckbox);
 
-/////////////////////////////////////////////////////////////// ci-dessus ne pas changer tous fonctionne ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // function validation form
 
@@ -213,7 +211,7 @@ function validateForm(){
   ){
     modalbg.style.display = "none";
     modalbgValidation.style.display = "block";
-
+    document.getElementById("myForm").reset();
   }
 
   return false;
