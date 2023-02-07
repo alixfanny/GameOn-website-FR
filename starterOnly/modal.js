@@ -2,7 +2,6 @@ const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))
 const NumberRegex = /^[0-9]+/
 
 
-
 function editNav() {
   const x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -27,7 +26,7 @@ function launchModal() {
 }
 
 // closing modal form
-let closing = document.getElementsByClassName("close");
+const closing = document.getElementsByClassName("close");
 
 for(let i=0; i < closing.length; i++){
   closing[i].addEventListener("click", function(){
