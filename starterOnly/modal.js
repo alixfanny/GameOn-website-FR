@@ -157,9 +157,6 @@ function validateRadio(){
   }
 }
 
-const buttonRadio = document.getElementById('btn-signup');
-buttonRadio.addEventListener("click",validateRadio);
-
 const valideButtonRadio = document.querySelectorAll("div#formRadio>input");
 for(let i=0; i < valideButtonRadio.length; i++){
  valideButtonRadio[i].addEventListener("change", validateRadio);

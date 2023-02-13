@@ -582,6 +582,10 @@ footer {
   .hero-text{
     font-size: 13px;
   }
+
+  .hero-img img{
+    width: 100%;
+  }
 } 
 
 
